@@ -218,7 +218,7 @@ int vfsmovefile(char *P1, char *P2) {
 	char *src_Path, *dest_Path;
 	src_Path = (char*) malloc(sizeof(char) * MAX_PATH_SIZE);
 	dest_Path = (char*) malloc(sizeof(char) * MAX_PATH_SIZE);
-	str-fd=cpy(src_Path, P1);
+	strcpy(src_Path, P1);
 	strcpy(dest_Path, P2);
 	char *src_Dir;
 	src_Dir = (char*) malloc(sizeof(char) * CHARSIZE);
