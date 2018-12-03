@@ -190,6 +190,15 @@ int vfsdeletedir(char *P1) {
 			-globoldata->root_bst
 		reduce number of file discriptor used by one stored in globaldata.
 	*/
+	int a=bst_delete(globaldata->root_bst, fd1);
+	int b=hashtable_delete(globaldata->hash_table, fd1);
+	int c=delete_node(globaldata->root_nary, fd1);
+	if(a!=0 || b!=0 || c!=0)
+		printf("Deletion Unsuccessful");
+	else
+	{
+		vfs.num_f_d_used-=1;
+	}
 	return 0;
 
 }
@@ -209,7 +218,7 @@ int vfsmovefile(char *P1, char *P2) {
 	char *src_Path, *dest_Path;
 	src_Path = (char*) malloc(sizeof(char) * MAX_PATH_SIZE);
 	dest_Path = (char*) malloc(sizeof(char) * MAX_PATH_SIZE);
-	strcpy(src_Path, P1);
+	str-fd=cpy(src_Path, P1);
 	strcpy(dest_Path, P2);
 	char *src_Dir;
 	src_Dir = (char*) malloc(sizeof(char) * CHARSIZE);
@@ -217,6 +226,8 @@ int vfsmovefile(char *P1, char *P2) {
 	/*to do
 		search for P1 and P2 in bst and store result in scr_fd and des_fd
 	*/
+	src_fd = bst_find(globaldata->root_bst,P1);
+	des_fd = bst_find(globaldata->root_bst,P2);
 	if (src_fd == NULL )
 		return MOVEDIR_CANNOT_FIND_SPECIFIED_SOURCEDIR;
 	if (des_fd == NULL )
@@ -243,5 +254,8 @@ int vfsmovefile(char *P1, char *P2) {
 	insert into bst above file descriptor(bst_fd_insert)
 	delete from bst above file descriptor(bst_fd_del)
 	*/
+	bst_insert(globaldata->root_bst, bst_fd_insert);
+	bst_delete(globaldata->root_bst, bst_fd_del);
+	
 	return 0;
 }
