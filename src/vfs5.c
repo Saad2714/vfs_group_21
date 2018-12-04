@@ -197,7 +197,7 @@ int vfsdeletedir(char *P1) {
 		printf("Deletion Unsuccessful");
 	else
 	{
-		vfs.num_f_d_used-=1;
+		globaldata->num_f_d_used-=1;
 	}
 	return 0;
 
