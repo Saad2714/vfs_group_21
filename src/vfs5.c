@@ -254,8 +254,9 @@ int vfsmovefile(char *P1, char *P2) {
 	insert into bst above file descriptor(bst_fd_insert)
 	delete from bst above file descriptor(bst_fd_del)
 	*/
-	bst_insert(globaldata->root_bst, bst_fd_insert);
-	bst_delete(globaldata->root_bst, bst_fd_del);
-	
+	int a=bst_insert(globaldata->root_bst, bst_fd_insert);
+	int b=bst_delete(globaldata->root_bst, bst_fd_del);
+	if(a!=0||b!=0)
+		printf("Cannot move file");
 	return 0;
 }
